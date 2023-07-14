@@ -21,3 +21,4 @@ jobs:
       ref: ${{ github.sha }}
 
       env: ${{ inputs.env }}
+      reset_gpu: true
