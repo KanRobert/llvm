@@ -428,6 +428,6 @@ for sycl_device in config.sycl_devices:
 # Set timeout for a single test
 try:
     import psutil
-    lit_config.maxIndividualTestTime = 600
+    lit_config.maxIndividualTestTime = 120
 except ImportError:
     pass
