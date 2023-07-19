@@ -1207,6 +1207,7 @@ static void DecodeIITType(unsigned &NextElt, ArrayRef<unsigned char> Infos,
                                              ArgInfo));
     return;
   }
+<<<<<<< HEAD
 #ifndef INTEL_SYCL_OPAQUEPOINTER_READY
   case IIT_PTR_TO_ARG: {
     unsigned ArgInfo = (NextElt == Infos.size() ? 0 : Infos[NextElt++]);
@@ -1227,6 +1228,8 @@ static void DecodeIITType(unsigned &NextElt, ArrayRef<unsigned char> Infos,
         IITDescriptor::get(IITDescriptor::AnyPtrToElt, ArgNo, RefNo));
     return;
   }
+=======
+>>>>>>> 4136e08f14ae9043b46bbe0a101e8609164d1be5
   case IIT_VEC_OF_ANYPTRS_TO_ELT: {
     unsigned short ArgNo = (NextElt == Infos.size() ? 0 : Infos[NextElt++]);
     unsigned short RefNo = (NextElt == Infos.size() ? 0 : Infos[NextElt++]);
@@ -1392,6 +1395,7 @@ static Type *DecodeFixedType(ArrayRef<Intrinsic::IITDescriptor> &Infos,
       return VectorType::get(EltTy, VTy->getElementCount());
     return EltTy;
   }
+<<<<<<< HEAD
 #ifndef INTEL_SYCL_OPAQUEPOINTER_READY
   case IITDescriptor::PtrToArgument: {
     Type *Ty = Tys[D.getArgumentNumber()];
@@ -1406,6 +1410,8 @@ static Type *DecodeFixedType(ArrayRef<Intrinsic::IITDescriptor> &Infos,
     Type *EltTy = VTy->getElementType();
     return PointerType::getUnqual(EltTy);
   }
+=======
+>>>>>>> 4136e08f14ae9043b46bbe0a101e8609164d1be5
   case IITDescriptor::VecElementArgument: {
     Type *Ty = Tys[D.getArgumentNumber()];
     if (VectorType *VTy = dyn_cast<VectorType>(Ty))
@@ -1419,9 +1425,6 @@ static Type *DecodeFixedType(ArrayRef<Intrinsic::IITDescriptor> &Infos,
     return VectorType::getInteger(VTy);
   }
   case IITDescriptor::VecOfAnyPtrsToElt:
-    // Return the overloaded type (which determines the pointers address space)
-    return Tys[D.getOverloadArgNumber()];
-  case IITDescriptor::AnyPtrToElt:
     // Return the overloaded type (which determines the pointers address space)
     return Tys[D.getOverloadArgNumber()];
   }
@@ -1626,6 +1629,7 @@ static bool matchIntrinsicType(
       return matchIntrinsicType(EltTy, Infos, ArgTys, DeferredChecks,
                                 IsDeferredCheck);
     }
+<<<<<<< HEAD
 #ifndef INTEL_SYCL_OPAQUEPOINTER_READY
     case IITDescriptor::PtrToArgument: {
       if (D.getArgumentNumber() >= ArgTys.size())
@@ -1672,6 +1676,8 @@ static bool matchIntrinsicType(
       return !ThisArgType->isOpaqueOrPointeeTypeMatches(
           ReferenceType->getElementType());
     }
+=======
+>>>>>>> 4136e08f14ae9043b46bbe0a101e8609164d1be5
     case IITDescriptor::VecOfAnyPtrsToElt: {
       unsigned RefArgNumber = D.getRefArgNumber();
       if (RefArgNumber >= ArgTys.size()) {
